@@ -1,4 +1,4 @@
-FROM miraclemie/python:3.7.6-debian
+FROM python:3.7.6-debian
 MAINTAINER Mie
 ENV GI_VERSION=master \
     REPO_URL="https://github.com/NewLineStart/gfriends-inputer.git" \
