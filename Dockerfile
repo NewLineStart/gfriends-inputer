@@ -7,7 +7,8 @@ ENV GI_VERSION=master \
     UMASK=000 \
     WORKDIR="/opt/gfriends-inputer"
 WORKDIR ${WORKDIR}
-RUN git clone -b ${GI_VERSION} ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule && \
+RUN apk add git && \
+    git clone -b ${GI_VERSION} ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule && \
     pip install -r requirements.txt && \
     mkdir -p ./dist/Lib/ && \
     cp ./Lib/opencv_face_detector_uint8.pb ./dist/Lib/ && \
