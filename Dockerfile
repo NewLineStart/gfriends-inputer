@@ -1,4 +1,4 @@
-FROM miraclemie/python:3.10.11-alpine-bso
+FROM miraclemie/python:3.7.6-debian
 MAINTAINER Mie
 ENV GI_VERSION=master \
     REPO_URL="https://github.com/NewLineStart/gfriends-inputer.git" \
@@ -7,7 +7,7 @@ ENV GI_VERSION=master \
     UMASK=000 \
     WORKDIR="/opt/gfriends-inputer"
 WORKDIR ${WORKDIR}
-RUN apk add git && \
+RUN apt-get install -y git && \
     git clone -b ${GI_VERSION} ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule && \
     pip install -r requirements.txt && \
     mkdir -p ./dist/Lib/ && \
