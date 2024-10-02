@@ -409,11 +409,14 @@ def read_config(config_file):
                 if WINOS: print('按任意键退出程序...'); os.system('pause>nul')
                 os._exit(1)
             repository_url = config_settings.get("下载设置", "Repository_Url")
-            host_url = config_settings.get("媒体服务器", "Host_Url")
-            api_key = config_settings.get("媒体服务器", "Host_API")
+            host_url = os.environ.get("Host_Url") if os.environ.get("Host_Url") \
+                else config_settings.get("媒体服务器", "Host_Url")
+            api_key = os.environ.get("Host_API") if os.environ.get("Host_API") \
+                else config_settings.get("媒体服务器", "Host_API")
             max_download_connect = config_settings.getint("下载设置", "MAX_DL")
             max_retries = config_settings.getint("下载设置", "MAX_Retry")
-            Proxy = config_settings.get("下载设置", "Proxy")
+            Proxy = os.environ.get("Proxy") if os.environ.get("Proxy") \
+                else config_settings.get("下载设置", "Proxy")
             download_path = config_settings.get("下载设置", "Download_Path")
             Conflict_Proc = config_settings.getint("下载设置", "Conflict_Proc")
             max_upload_connect = config_settings.getint("导入设置", "MAX_UL")
@@ -517,7 +520,7 @@ Local_Path = ./Avatar/
 # 0 - 不覆盖
 # 1 - 全部覆盖
 # 2 - 增量导入（头像有更新时再覆盖）
-OverWrite = 2
+OverWrite = 1
 
 ### 导入线程数 ###
 # 导入至本地或内网服务器时，网络稳定可适当增大导入线程数（推荐：20-100）
@@ -620,8 +623,8 @@ def rewriteable_word(word):
 def del_all():
     print('【调试模式】删除所有头像及信息\n')
     list_persons = read_persons(host_url, api_key)
-    rewriteable_word('按任意键开始...')
-    os.system('pause>nul') if WINOS else input('Press Enter to start...')
+    # rewriteable_word('按任意键开始...')
+    # os.system('pause>nul') if WINOS else input('Press Enter to start...')
     with alive_bar(len(list_persons), enrich_print=False, dual_line=True) as bar:
         for dic_each_actor in list_persons:
             bar.text('正在删除：' + dic_each_actor['Name'])
