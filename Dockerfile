@@ -14,4 +14,5 @@ RUN apt-get update && \
     mkdir -p ./dist/Lib/ && \
     cp ./Lib/opencv_face_detector_uint8.pb ./dist/Lib/ && \
     cp ./Lib/opencv_face_detector.pbtxt ./dist/Lib/
+VOLUME [ "/opt/gfriends-inputer/Downloads","/opt/gfriends-inputer/Avatar"]
 ENTRYPOINT ["python","Gfriends-Inputer.py"]
