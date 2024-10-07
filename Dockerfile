@@ -10,7 +10,6 @@ WORKDIR ${WORKDIR}
 RUN apt-get update && \
     apt-get install -y git && \
     git clone -b ${GI_VERSION} ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule && \
-    pwd && ls && \
     pip install -r requirements.txt && \
     mkdir -p ./dist/Lib/ && \
     cp ./Lib/opencv_face_detector_uint8.pb ./dist/Lib/ && \
